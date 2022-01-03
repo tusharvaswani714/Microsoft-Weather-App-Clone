@@ -3,8 +3,6 @@ import styled from "styled-components";
 
 const RealTimeWeatherContainer = styled.div`
     text-align: center;
-    font-family: "Spline Sans", sans-serif;
-    font-weight: 300;
 `;
 
 const Location = styled.div`
@@ -45,10 +43,11 @@ const OtherUnit = styled.div`
 
 const TemperatureText = styled.div`
     font-size: 1.5625em;
+    margin: 18px 0px;
 `;
 
 const LastUpdated = styled.div`
-    margin: 11px 0px;
+    margin-bottom: 15px;
     font-size: 0.9375em;
 `;
 
@@ -58,7 +57,7 @@ const Extras = styled.div`
     align-items: center;
     font-size: 0.9375em;
     gap: 20px;
-    margin-bottom: 8px;
+    margin-bottom: 15px;
 `;
 
 const Extra = styled.div``;
