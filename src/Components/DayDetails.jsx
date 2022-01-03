@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { realtime_weather } from "../data";
 
 const DayDetailsContainer = styled.div``;
 
@@ -25,13 +26,24 @@ const DayDetail = styled.div`
     font-size: 20px;
 `;
 
-const DayAndNightText = styled.div``;
+const DayDetailText = styled.div``;
 
-const DayAndNightTextHeading = styled.div`
+const DayDetailTextHeading = styled.div`
     margin-bottom: 10px;
 `;
 
-const DayAndNightTextContent = styled.div`
+const DayDetailTextContent = styled.div`
+    color: #d9dde8;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+`;
+
+const DayDetailTextContentLogo = styled.img`
+    width: 50px;
+`;
+
+const DayDetailTextContentDesc = styled.div`
     color: #d9dde8;
 `;
 
@@ -41,20 +53,49 @@ function DayDetails(props) {
             <DayDetailsHeading>Day Details</DayDetailsHeading>
             <DayDetailsContent>
                 <DayDetail>
-                    <DayAndNightText>
-                        <DayAndNightTextHeading>Day</DayAndNightTextHeading>
-                        <DayAndNightTextContent>
-                            Night Skies
-                        </DayAndNightTextContent>
-                    </DayAndNightText>
-                    <DayAndNightText>
-                        <DayAndNightTextHeading>Night</DayAndNightTextHeading>
-                        <DayAndNightTextContent>
-                            Night Skies
-                        </DayAndNightTextContent>
-                    </DayAndNightText>
+                    <DayDetailText>
+                        <DayDetailTextHeading>Day</DayDetailTextHeading>
+                        <DayDetailTextContent>Night Skies</DayDetailTextContent>
+                    </DayDetailText>
+                    <DayDetailText>
+                        <DayDetailTextHeading>Night</DayDetailTextHeading>
+                        <DayDetailTextContent>Night Skies</DayDetailTextContent>
+                    </DayDetailText>
                 </DayDetail>
-                <DayDetail></DayDetail>
+                <DayDetail>
+                    <DayDetailText>
+                        <DayDetailTextHeading>Sunrise</DayDetailTextHeading>
+                        <DayDetailTextContent>
+                            <DayDetailTextContentLogo
+                                src={
+                                    "https://ik.imagekit.io/dchud9yflpr/sunrise_bhQw0Iuzr.svg?updatedAt=1641230704341"
+                                }
+                            />
+                            <DayDetailTextContentDesc>
+                                {
+                                    realtime_weather.forecast.forecastday[0]
+                                        .astro.sunrise
+                                }
+                            </DayDetailTextContentDesc>
+                        </DayDetailTextContent>
+                    </DayDetailText>
+                    <DayDetailText>
+                        <DayDetailTextHeading>Sunset</DayDetailTextHeading>
+                        <DayDetailTextContent>
+                            <DayDetailTextContentLogo
+                                src={
+                                    "https://ik.imagekit.io/dchud9yflpr/sunset_xmlFFk7th.svg?updatedAt=1641230704467"
+                                }
+                            />
+                            <DayDetailTextContentDesc>
+                                {
+                                    realtime_weather.forecast.forecastday[0]
+                                        .astro.sunset
+                                }
+                            </DayDetailTextContentDesc>
+                        </DayDetailTextContent>
+                    </DayDetailText>
+                </DayDetail>
                 <DayDetail></DayDetail>
                 <DayDetail></DayDetail>
                 <DayDetail></DayDetail>
