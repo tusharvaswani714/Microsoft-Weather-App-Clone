@@ -7,10 +7,11 @@ const RealTimeWeatherContainer = styled.div`
     font-weight: 300;
 `;
 
-const Location = styled.div``;
+const Location = styled.div`
+    font-size: 1.5625em;
+`;
 
 const Temperature = styled.div`
-    font-weight: 400;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,16 +19,18 @@ const Temperature = styled.div`
 `;
 
 const TemperatureIcon = styled.img`
-    width: 35px;
+    width: 70px;
 `;
 
 const TemperatureValue = styled.div`
-    font-size: 50px;
+    font-size: 4.6875em;
 `;
 
 const DegreeSymbol = styled.span``;
 
-const TemperatureUnitSwitcher = styled.div``;
+const TemperatureUnitSwitcher = styled.div`
+    font-size: 1.5625em;
+`;
 
 const SelectedUnit = styled.div``;
 
@@ -40,21 +43,21 @@ const OtherUnit = styled.div`
     }
 `;
 
-const TemperatureText = styled.div``;
+const TemperatureText = styled.div`
+    font-size: 1.5625em;
+`;
 
 const LastUpdated = styled.div`
-    font-size: 10px;
     margin: 11px 0px;
+    font-size: 0.9375em;
 `;
 
 const Extras = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 10px;
+    font-size: 0.9375em;
     gap: 20px;
-    letter-spacing: 0.6px;
-    word-spacing: 3px;
     margin-bottom: 8px;
 `;
 
@@ -83,8 +86,8 @@ function RealTimeWeather(props) {
                 <TemperatureIcon src={"https://ratentoi.sirv.com/sunny.svg"} />
                 <TemperatureValue>
                     {currentUnit === "C"
-                        ? props.current.temp_c
-                        : props.current.temp_f}
+                        ? Math.trunc(props.current.temp_c)
+                        : Math.trunc(props.current.temp_f)}
                     <DegreeSymbol>°</DegreeSymbol>
                 </TemperatureValue>
                 <TemperatureUnitSwitcher>
@@ -102,15 +105,15 @@ function RealTimeWeather(props) {
                 <Extra>
                     Feels Like{" "}
                     {currentUnit === "C"
-                        ? props.current.feelslike_c
-                        : props.current.feelslike_f}
+                        ? Math.trunc(props.current.feelslike_c)
+                        : Math.trunc(props.current.feelslike_f)}
                     <DegreeSymbol>°</DegreeSymbol>
                 </Extra>
-                <Extra>Wind {props.current.wind_kph}</Extra>
-                <Extra>Visibility {props.current.vis_km}</Extra>
+                <Extra>Wind {props.current.wind_kph} km/h</Extra>
+                <Extra>Visibility {props.current.vis_km} km</Extra>
             </Extras>
             <Extras>
-                <Extra>Barometer {props.current.pressure_mb}</Extra>
+                <Extra>Barometer {props.current.pressure_mb} mb</Extra>
                 <Extra>Humidity {props.current.humidity}%</Extra>
                 <Extra>Dew Point</Extra>
             </Extras>

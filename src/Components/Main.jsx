@@ -10,6 +10,8 @@ const MainArea = styled.div`
     background-size: cover;
     background-position: center;
     color: #fff;
+    letter-spacing: 0.6px;
+    word-spacing: 3px;
 `;
 
 class Main extends React.Component {
