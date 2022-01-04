@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { realtime_weather } from "../data";
 
 const DayDetailsContainer = styled.div``;
 
@@ -23,7 +22,7 @@ const DayDetail = styled.div`
     display: flex;
     flex-direction: column;
     gap: 15px;
-    font-size: 20px;
+    font-size: 15px;
 `;
 
 const DayDetailText = styled.div``;
@@ -33,19 +32,17 @@ const DayDetailTextHeading = styled.div`
 `;
 
 const DayDetailTextContent = styled.div`
-    color: #d9dde8;
     display: flex;
     align-items: center;
     gap: 12px;
+    font-size: 20px;
 `;
 
 const DayDetailTextContentLogo = styled.img`
     width: 50px;
 `;
 
-const DayDetailTextContentDesc = styled.div`
-    color: #d9dde8;
-`;
+const DayDetailTextContentDesc = styled.div``;
 
 function DayDetails(props) {
     return (
@@ -72,10 +69,7 @@ function DayDetails(props) {
                                 }
                             />
                             <DayDetailTextContentDesc>
-                                {
-                                    realtime_weather.forecast.forecastday[0]
-                                        .astro.sunrise
-                                }
+                                {props.forecast.forecastday[0].astro.sunrise}
                             </DayDetailTextContentDesc>
                         </DayDetailTextContent>
                     </DayDetailText>
@@ -88,15 +82,54 @@ function DayDetails(props) {
                                 }
                             />
                             <DayDetailTextContentDesc>
-                                {
-                                    realtime_weather.forecast.forecastday[0]
-                                        .astro.sunset
-                                }
+                                {props.forecast.forecastday[0].astro.sunset}
                             </DayDetailTextContentDesc>
                         </DayDetailTextContent>
                     </DayDetailText>
                 </DayDetail>
-                <DayDetail></DayDetail>
+                <DayDetail>
+                    <DayDetailText>
+                        <DayDetailTextHeading>Moonrise</DayDetailTextHeading>
+                        <DayDetailTextContent>
+                            <DayDetailTextContentLogo
+                                src={
+                                    "https://ik.imagekit.io/dchud9yflpr/sunrise_bhQw0Iuzr.svg?updatedAt=1641230704341"
+                                }
+                            />
+                            <DayDetailTextContentDesc>
+                                {props.forecast.forecastday[0].astro.moonrise}
+                            </DayDetailTextContentDesc>
+                        </DayDetailTextContent>
+                    </DayDetailText>
+                    <DayDetailText>
+                        <DayDetailTextHeading>Moonset</DayDetailTextHeading>
+                        <DayDetailTextContent>
+                            <DayDetailTextContentLogo
+                                src={
+                                    "https://ik.imagekit.io/dchud9yflpr/sunset_xmlFFk7th.svg?updatedAt=1641230704467"
+                                }
+                            />
+                            <DayDetailTextContentDesc>
+                                {props.forecast.forecastday[0].astro.moonset}
+                            </DayDetailTextContentDesc>
+                        </DayDetailTextContent>
+                    </DayDetailText>
+                    <DayDetailText>
+                        <DayDetailTextHeading>Moon Phase</DayDetailTextHeading>
+                        <DayDetailTextContent>
+                            <DayDetailTextContentLogo
+                                src={
+                                    "https://ik.imagekit.io/dchud9yflpr/sunset_xmlFFk7th.svg?updatedAt=1641230704467"
+                                }
+                            />
+                        </DayDetailTextContent>
+                    </DayDetailText>
+                    <DayDetailText>
+                        <DayDetailTextHeading>
+                            {props.forecast.forecastday[0].astro.moon_phase}
+                        </DayDetailTextHeading>
+                    </DayDetailText>
+                </DayDetail>
                 <DayDetail></DayDetail>
                 <DayDetail></DayDetail>
                 <DayDetail></DayDetail>
