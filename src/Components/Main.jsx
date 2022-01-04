@@ -9,7 +9,7 @@ const MainArea = styled.div`
     letter-spacing: 0.6px;
     word-spacing: 3px;
     max-width: 1235px;
-    font-family: "Spline Sans", sans-serif;
+    font-family: "PT Sans", sans-serif;
     font-weight: 300;
     margin: auto;
 `;

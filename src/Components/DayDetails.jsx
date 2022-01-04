@@ -14,6 +14,19 @@ const DayDetailsContent = styled.div`
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
     grid-gap: 25px;
+    @media screen and (max-width: 1340px) {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+    @media screen and (max-width: 1030px) {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+    @media screen and (max-width: 700px) {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(6, auto);
+        align-items: center;
+    }
 `;
 
 const DayDetail = styled.div`
@@ -45,6 +58,31 @@ const DayDetailTextContentLogo = styled.img`
 `;
 
 const DayDetailTextContentDesc = styled.div``;
+
+const TemperatureThermometer = styled.div`
+    width: 100%;
+`;
+
+const TemperatureThermometerBar = styled.div`
+    width: 10px;
+    height: 230px;
+    position: relative;
+    box-shadow: 0px 0px 0px 5px rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    background: #fff;
+    margin: auto;
+`;
+
+const TemperatureThermometerCircle = styled.div`
+    margin: auto;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 0px 5px rgba(255, 255, 255, 0.3);
+    background: #fff;
+    position: relative;
+    top: -4px;
+`;
 
 function getMoonPhasesImgs(active) {
     let moonphasesimgurls = [];
@@ -130,11 +168,18 @@ function DayDetails(props) {
                     </DayDetailText>
                     <DayDetailText>
                         <DayDetailTextHeading>Moon Phase</DayDetailTextHeading>
-                        <DayDetailTextContent>
+                        <DayDetailTextContent
+                            style={{ justifyContent: "center" }}
+                        >
                             {getMoonPhasesImgs(
                                 props.forecast.forecastday[0].astro.moon_phase
                             ).map(function (url, index) {
-                                return <DayDetailTextContentLogo src={url} />;
+                                return (
+                                    <DayDetailTextContentLogo
+                                        src={url}
+                                        style={{ width: "20px" }}
+                                    />
+                                );
                             })}
                         </DayDetailTextContent>
                     </DayDetailText>
@@ -144,9 +189,72 @@ function DayDetails(props) {
                         </DayDetailTextHeading>
                     </DayDetailText>
                 </DayDetail>
-                <DayDetail></DayDetail>
-                <DayDetail></DayDetail>
-                <DayDetail></DayDetail>
+                <DayDetail>
+                    <DayDetailText>
+                        <DayDetailTextHeading>Air Quality</DayDetailTextHeading>
+                    </DayDetailText>
+                    <DayDetailText>
+                        <DayDetailTextContentDesc>
+                            CO - {Math.trunc(props.current.air_quality.co)}
+                        </DayDetailTextContentDesc>
+                    </DayDetailText>
+                    <DayDetailText>
+                        <DayDetailTextContentDesc>
+                            NO<sub>2</sub> -{" "}
+                            {Math.trunc(props.current.air_quality.no2)}
+                        </DayDetailTextContentDesc>
+                    </DayDetailText>
+                    <DayDetailText>
+                        <DayDetailTextContentDesc>
+                            O<sub>3</sub> -{" "}
+                            {Math.trunc(props.current.air_quality.o3)}
+                        </DayDetailTextContentDesc>
+                    </DayDetailText>
+                    <DayDetailText>
+                        <DayDetailTextContentDesc>
+                            SO<sub>2</sub> -{" "}
+                            {Math.trunc(props.current.air_quality.so2)}
+                        </DayDetailTextContentDesc>
+                    </DayDetailText>
+                    <DayDetailText>
+                        <DayDetailTextContentDesc>
+                            PM2.5 -{" "}
+                            {Math.trunc(props.current.air_quality.pm2_5)}
+                        </DayDetailTextContentDesc>
+                    </DayDetailText>
+                    <DayDetailText>
+                        <DayDetailTextContentDesc>
+                            PM10 - {Math.trunc(props.current.air_quality.pm10)}
+                        </DayDetailTextContentDesc>
+                    </DayDetailText>
+                </DayDetail>
+                <DayDetail>
+                    <DayDetailText>
+                        <DayDetailTextHeading>Humidity</DayDetailTextHeading>
+                        <DayDetailTextContent>
+                            {props.current.humidity}%
+                        </DayDetailTextContent>
+                    </DayDetailText>
+                    <DayDetailText>
+                        <DayDetailTextHeading>
+                            Precipitation
+                        </DayDetailTextHeading>
+                        <DayDetailTextContent>
+                            {props.current.precip_mm}mm
+                        </DayDetailTextContent>
+                    </DayDetailText>
+                </DayDetail>
+                <DayDetail>
+                    <DayDetailText>
+                        <DayDetailTextHeading>Temperature</DayDetailTextHeading>
+                        <DayDetailTextContent>
+                            <TemperatureThermometer>
+                                <TemperatureThermometerBar></TemperatureThermometerBar>
+                                <TemperatureThermometerCircle></TemperatureThermometerCircle>
+                            </TemperatureThermometer>
+                        </DayDetailTextContent>
+                    </DayDetailText>
+                </DayDetail>
             </DayDetailsContent>
         </DayDetailsContainer>
     );
