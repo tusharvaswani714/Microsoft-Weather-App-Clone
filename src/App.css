@@ -13,5 +13,5 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-blend-mode: hard-light;
-    background-color: rgba(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.8);
 }
