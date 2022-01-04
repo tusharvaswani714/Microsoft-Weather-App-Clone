@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { realtime_weather } from "../data";
 import RealTimeWeather from "./RealTimeWeather";
 import DayDetails from "./DayDetails";
+import DailyData from "./DailyData";
 
 const MainArea = styled.div`
     color: #fff;
@@ -17,44 +18,64 @@ const MainArea = styled.div`
 class Main extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { weatherdata: {}, dataRecieved: false };
+        this.state = { weatherdata: {}, dataRecieved: false, currentUnit: "C" };
     }
-    componentDidMount() {
-        window.navigator.geolocation.getCurrentPosition(
-            (location) => {
-                fetch(
-                    `https://api.weatherapi.com/v1/forecast.json?key=07ea304d0187480f863192418220201&q=${location.coords.latitude},${location.coords.longitude}&aqi=yes`
-                )
-                    .then((response) => response.json())
-                    .then((data) => {
-                        this.setState({ weatherdata: data }, function () {
-                            this.setState({ dataRecieved: true });
-                        });
-                    });
-            },
-            (err) => {
-                console.log(err);
-            },
-            { enableHighAccuracy: true }
-        );
+    // componentDidMount() {
+    //     window.navigator.geolocation.getCurrentPosition(
+    //         (location) => {
+    //             fetch(
+    //                 `https://api.weatherapi.com/v1/forecast.json?key=07ea304d0187480f863192418220201&q=${location.coords.latitude},${location.coords.longitude}&days=7&aqi=yes`
+    //             )
+    //                 .then((response) => response.json())
+    //                 .then((data) => {
+    //                     this.setState({ weatherdata: data }, function () {
+    //                         this.setState({ dataRecieved: true });
+    //                     });
+    //                 });
+    //         },
+    //         (err) => {
+    //             console.log(err);
+    //         },
+    //         { enableHighAccuracy: true }
+    //     );
+    // }
+    changeUnit() {
+        if (this.state.currentUnit === "C") {
+            this.setState({ currentUnit: "F" });
+            return;
+        }
+        this.setState({ currentUnit: "C" });
     }
     render() {
-        if (this.state.dataRecieved) {
-            return (
-                <MainArea>
-                    <RealTimeWeather {...this.state.weatherdata} />
-                    <DayDetails {...this.state.weatherdata} />
-                </MainArea>
-            );
-        } else {
-            return null;
-        }
-        // return (
-        //     <MainArea>
-        //         <RealTimeWeather {...realtime_weather} />
-        //         <DayDetails {...realtime_weather} />
-        //     </MainArea>
-        // );
+        // if (this.state.dataRecieved) {
+        //     return (
+        //         <MainArea>
+        //             <RealTimeWeather {...this.state.weatherdata} />
+        //             <DayDetails {...this.state.weatherdata} />
+        //         </MainArea>
+        //     );
+        // } else {
+        //     return null;
+        // }
+        return (
+            <MainArea>
+                <RealTimeWeather
+                    realtime_weather={realtime_weather}
+                    unit={this.state.currentUnit}
+                    changeUnit={this.changeUnit}
+                />
+                <DailyData
+                    realtime_weather={realtime_weather}
+                    unit={this.state.currentUnit}
+                    changeUnit={this.changeUnit}
+                />
+                <DayDetails
+                    realtime_weather={realtime_weather}
+                    unit={this.state.currentUnit}
+                    changeUnit={this.changeUnit}
+                />
+            </MainArea>
+        );
     }
 }
 

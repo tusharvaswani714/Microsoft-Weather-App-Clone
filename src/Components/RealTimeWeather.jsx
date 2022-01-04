@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
+import { toTime } from "../importantFunctions";
 
 const RealTimeWeatherContainer = styled.div`
     text-align: center;
@@ -62,58 +63,51 @@ const Extras = styled.div`
 
 const Extra = styled.div``;
 
-function RealTimeWeather(props) {
-    const [currentUnit, changeCurrentUnit] = useState("C");
-    function toTime(unixTimeString) {
-        let time = new Date(unixTimeString * 1000);
-        let time_string = `${time.getHours()}:${time.getMinutes()}`;
-        return time_string;
-    }
-    function changeUnit() {
-        if (currentUnit === "C") {
-            changeCurrentUnit("F");
-            return;
-        }
-        changeCurrentUnit("C");
-    }
+function RealTimeWeather({ realtime_weather, unit, changeUnit }) {
     return (
         <RealTimeWeatherContainer>
             <Location>
-                {props.location.name}, {props.location.country}
+                {realtime_weather.location.name},{" "}
+                {realtime_weather.location.country}
             </Location>
             <Temperature>
                 <TemperatureIcon src={"https://ratentoi.sirv.com/sunny.svg"} />
                 <TemperatureValue>
-                    {currentUnit === "C"
-                        ? Math.trunc(props.current.temp_c)
-                        : Math.trunc(props.current.temp_f)}
+                    {unit === "C"
+                        ? Math.trunc(realtime_weather.current.temp_c)
+                        : Math.trunc(realtime_weather.current.temp_f)}
                     <DegreeSymbol>°</DegreeSymbol>
                 </TemperatureValue>
                 <TemperatureUnitSwitcher>
-                    <SelectedUnit>{currentUnit}</SelectedUnit>
+                    <SelectedUnit>{unit}</SelectedUnit>
                     <OtherUnit onClick={changeUnit}>
-                        {currentUnit === "C" ? "F" : "C"}
+                        {unit === "C" ? "F" : "C"}
                     </OtherUnit>
                 </TemperatureUnitSwitcher>
             </Temperature>
-            <TemperatureText>{props.current.condition.text}</TemperatureText>
+            <TemperatureText>
+                {realtime_weather.current.condition.text}
+            </TemperatureText>
             <LastUpdated>
-                Updated as of {toTime(props.current.last_updated_epoch)}
+                Updated as of{" "}
+                {toTime(realtime_weather.current.last_updated_epoch)}
             </LastUpdated>
             <Extras>
                 <Extra>
                     Feels Like{" "}
-                    {currentUnit === "C"
-                        ? Math.trunc(props.current.feelslike_c)
-                        : Math.trunc(props.current.feelslike_f)}
+                    {unit === "C"
+                        ? Math.trunc(realtime_weather.current.feelslike_c)
+                        : Math.trunc(realtime_weather.current.feelslike_f)}
                     <DegreeSymbol>°</DegreeSymbol>
                 </Extra>
-                <Extra>Wind {props.current.wind_kph} km/h</Extra>
-                <Extra>Visibility {props.current.vis_km} km</Extra>
+                <Extra>Wind {realtime_weather.current.wind_kph} km/h</Extra>
+                <Extra>Visibility {realtime_weather.current.vis_km} km</Extra>
             </Extras>
             <Extras>
-                <Extra>Barometer {props.current.pressure_mb} mb</Extra>
-                <Extra>Humidity {props.current.humidity}%</Extra>
+                <Extra>
+                    Barometer {realtime_weather.current.pressure_mb} mb
+                </Extra>
+                <Extra>Humidity {realtime_weather.current.humidity}%</Extra>
                 <Extra>Dew Point</Extra>
             </Extras>
         </RealTimeWeatherContainer>

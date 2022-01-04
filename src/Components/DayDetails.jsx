@@ -96,7 +96,7 @@ function getMoonPhasesImgs(active) {
     return moonphasesimgurls;
 }
 
-function DayDetails(props) {
+function DayDetails({ realtime_weather }) {
     return (
         <DayDetailsContainer>
             <DayDetailsHeading>Day Details</DayDetailsHeading>
@@ -121,7 +121,10 @@ function DayDetails(props) {
                                 }
                             />
                             <DayDetailTextContentDesc>
-                                {props.forecast.forecastday[0].astro.sunrise}
+                                {
+                                    realtime_weather.forecast.forecastday[0]
+                                        .astro.sunrise
+                                }
                             </DayDetailTextContentDesc>
                         </DayDetailTextContent>
                     </DayDetailText>
@@ -134,7 +137,10 @@ function DayDetails(props) {
                                 }
                             />
                             <DayDetailTextContentDesc>
-                                {props.forecast.forecastday[0].astro.sunset}
+                                {
+                                    realtime_weather.forecast.forecastday[0]
+                                        .astro.sunset
+                                }
                             </DayDetailTextContentDesc>
                         </DayDetailTextContent>
                     </DayDetailText>
@@ -149,7 +155,10 @@ function DayDetails(props) {
                                 }
                             />
                             <DayDetailTextContentDesc>
-                                {props.forecast.forecastday[0].astro.moonrise}
+                                {
+                                    realtime_weather.forecast.forecastday[0]
+                                        .astro.moonrise
+                                }
                             </DayDetailTextContentDesc>
                         </DayDetailTextContent>
                     </DayDetailText>
@@ -162,7 +171,10 @@ function DayDetails(props) {
                                 }
                             />
                             <DayDetailTextContentDesc>
-                                {props.forecast.forecastday[0].astro.moonset}
+                                {
+                                    realtime_weather.forecast.forecastday[0]
+                                        .astro.moonset
+                                }
                             </DayDetailTextContentDesc>
                         </DayDetailTextContent>
                     </DayDetailText>
@@ -172,7 +184,8 @@ function DayDetails(props) {
                             style={{ justifyContent: "center" }}
                         >
                             {getMoonPhasesImgs(
-                                props.forecast.forecastday[0].astro.moon_phase
+                                realtime_weather.forecast.forecastday[0].astro
+                                    .moon_phase
                             ).map(function (url, index) {
                                 return (
                                     <DayDetailTextContentLogo
@@ -185,7 +198,10 @@ function DayDetails(props) {
                     </DayDetailText>
                     <DayDetailText>
                         <DayDetailTextHeading>
-                            {props.forecast.forecastday[0].astro.moon_phase}
+                            {
+                                realtime_weather.forecast.forecastday[0].astro
+                                    .moon_phase
+                            }
                         </DayDetailTextHeading>
                     </DayDetailText>
                 </DayDetail>
@@ -195,36 +211,50 @@ function DayDetails(props) {
                     </DayDetailText>
                     <DayDetailText>
                         <DayDetailTextContentDesc>
-                            CO - {Math.trunc(props.current.air_quality.co)}
+                            CO -{" "}
+                            {Math.trunc(
+                                realtime_weather.current.air_quality.co
+                            )}
                         </DayDetailTextContentDesc>
                     </DayDetailText>
                     <DayDetailText>
                         <DayDetailTextContentDesc>
                             NO<sub>2</sub> -{" "}
-                            {Math.trunc(props.current.air_quality.no2)}
+                            {Math.trunc(
+                                realtime_weather.current.air_quality.no2
+                            )}
                         </DayDetailTextContentDesc>
                     </DayDetailText>
                     <DayDetailText>
                         <DayDetailTextContentDesc>
                             O<sub>3</sub> -{" "}
-                            {Math.trunc(props.current.air_quality.o3)}
+                            {Math.trunc(
+                                realtime_weather.current.air_quality.o3
+                            )}
                         </DayDetailTextContentDesc>
                     </DayDetailText>
                     <DayDetailText>
                         <DayDetailTextContentDesc>
                             SO<sub>2</sub> -{" "}
-                            {Math.trunc(props.current.air_quality.so2)}
+                            {Math.trunc(
+                                realtime_weather.current.air_quality.so2
+                            )}
                         </DayDetailTextContentDesc>
                     </DayDetailText>
                     <DayDetailText>
                         <DayDetailTextContentDesc>
                             PM2.5 -{" "}
-                            {Math.trunc(props.current.air_quality.pm2_5)}
+                            {Math.trunc(
+                                realtime_weather.current.air_quality.pm2_5
+                            )}
                         </DayDetailTextContentDesc>
                     </DayDetailText>
                     <DayDetailText>
                         <DayDetailTextContentDesc>
-                            PM10 - {Math.trunc(props.current.air_quality.pm10)}
+                            PM10 -{" "}
+                            {Math.trunc(
+                                realtime_weather.current.air_quality.pm10
+                            )}
                         </DayDetailTextContentDesc>
                     </DayDetailText>
                 </DayDetail>
@@ -232,7 +262,7 @@ function DayDetails(props) {
                     <DayDetailText>
                         <DayDetailTextHeading>Humidity</DayDetailTextHeading>
                         <DayDetailTextContent>
-                            {props.current.humidity}%
+                            {realtime_weather.current.humidity}%
                         </DayDetailTextContent>
                     </DayDetailText>
                     <DayDetailText>
@@ -240,7 +270,7 @@ function DayDetails(props) {
                             Precipitation
                         </DayDetailTextHeading>
                         <DayDetailTextContent>
-                            {props.current.precip_mm}mm
+                            {realtime_weather.current.precip_mm}mm
                         </DayDetailTextContent>
                     </DayDetailText>
                 </DayDetail>
