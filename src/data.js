@@ -1028,6 +1028,91 @@ export let realtime_weather = {
         ],
     },
 };
+
+export let moonphases_url = {
+    fullmoon:
+        "https://ik.imagekit.io/dchud9yflpr/fullmoon_hSKsqGBY9.svg?updatedAt=1641305305496",
+    fullmoontransparent:
+        "https://ik.imagekit.io/dchud9yflpr/fullmoontransparent_OXo6IATtL0F.svg?updatedAt=1641306098218",
+    firstquarter:
+        "https://ik.imagekit.io/dchud9yflpr/firstquarter_1__alRmNeSn4N_q.svg?updatedAt=1641305905172",
+    firstquartertransparent:
+        "https://ik.imagekit.io/dchud9yflpr/firstquarter_transparent_7SQv5hRVk.svg?updatedAt=1641305786254",
+    lastquarter:
+        "https://ik.imagekit.io/dchud9yflpr/lastquarter_8-pvMNFZR.svg?updatedAt=1641306566665",
+    lastquartertransparent:
+        "https://ik.imagekit.io/dchud9yflpr/lastquartertransparent_FEqkCvDL3.svg?updatedAt=1641306566793",
+    waxingcrescent:
+        "https://ik.imagekit.io/dchud9yflpr/waxingcrescent_ccOU9Hwn9c1.svg?updatedAt=1641306189861",
+    waxingcrescenttransparent:
+        "https://ik.imagekit.io/dchud9yflpr/waxingcrescenttransparent_KC2n2u7tP.svg?updatedAt=1641306123167",
+    waningcrescent:
+        "https://ik.imagekit.io/dchud9yflpr/waningcrescent_ABUuDzzFT.svg?updatedAt=1641306478952",
+    waningcrescenttransparent:
+        "https://ik.imagekit.io/dchud9yflpr/waningcrescenttransparent_0xW6ExPsG.svg?updatedAt=1641306478965",
+};
+
+export let activemoonphases = new Map([
+    [
+        "Full Moon",
+        "https://ik.imagekit.io/dchud9yflpr/fullmoon_hSKsqGBY9.svg?updatedAt=1641305305496",
+    ],
+    [
+        "Waxing Crescent",
+        "https://ik.imagekit.io/dchud9yflpr/waxingcrescent_ccOU9Hwn9c1.svg?updatedAt=1641306189861",
+    ],
+    [
+        "First Quarter",
+        "https://ik.imagekit.io/dchud9yflpr/firstquarter_1__alRmNeSn4N_q.svg?updatedAt=1641305905172",
+    ],
+    [
+        "Waxing Gibbous",
+        "https://ik.imagekit.io/dchud9yflpr/fullmoon_hSKsqGBY9.svg?updatedAt=1641305305496",
+    ],
+    [
+        "Last Quarter",
+        "https://ik.imagekit.io/dchud9yflpr/lastquarter_8-pvMNFZR.svg?updatedAt=1641306566665",
+    ],
+    [
+        "Waning Gibbous",
+        "https://ik.imagekit.io/dchud9yflpr/fullmoon_hSKsqGBY9.svg?updatedAt=1641305305496",
+    ],
+    [
+        "Waning Crescent",
+        "https://ik.imagekit.io/dchud9yflpr/waningcrescent_ABUuDzzFT.svg?updatedAt=1641306478952",
+    ],
+]);
+
+export let inactivemoonphases = new Map([
+    [
+        "Full Moon",
+        "https://ik.imagekit.io/dchud9yflpr/fullmoontransparent_OXo6IATtL0F.svg?updatedAt=1641306098218",
+    ],
+    [
+        "Waxing Crescent",
+        "https://ik.imagekit.io/dchud9yflpr/waxingcrescenttransparent_KC2n2u7tP.svg?updatedAt=1641306123167",
+    ],
+    [
+        "First Quarter",
+        "https://ik.imagekit.io/dchud9yflpr/firstquarter_transparent_7SQv5hRVk.svg?updatedAt=1641305786254",
+    ],
+    [
+        "Waxing Gibbous",
+        "https://ik.imagekit.io/dchud9yflpr/fullmoontransparent_OXo6IATtL0F.svg?updatedAt=1641306098218",
+    ],
+    [
+        "Last Quarter",
+        "https://ik.imagekit.io/dchud9yflpr/lastquartertransparent_FEqkCvDL3.svg?updatedAt=1641306566793",
+    ],
+    [
+        "Waning Gibbous",
+        "https://ik.imagekit.io/dchud9yflpr/fullmoontransparent_OXo6IATtL0F.svg?updatedAt=1641306098218",
+    ],
+    [
+        "Waning Crescent",
+        "https://ik.imagekit.io/dchud9yflpr/waningcrescenttransparent_0xW6ExPsG.svg?updatedAt=1641306478965",
+    ],
+]);
 // export let realtime_weather;
 // let lat, long;
 // window.navigator.geolocation.getCurrentPosition(

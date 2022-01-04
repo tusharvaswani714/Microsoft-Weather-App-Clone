@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { activemoonphases, inactivemoonphases } from "../data";
 
 const DayDetailsContainer = styled.div``;
 
@@ -36,6 +37,7 @@ const DayDetailTextContent = styled.div`
     align-items: center;
     gap: 12px;
     font-size: 20px;
+    flex-wrap: wrap;
 `;
 
 const DayDetailTextContentLogo = styled.img`
@@ -43,6 +45,18 @@ const DayDetailTextContentLogo = styled.img`
 `;
 
 const DayDetailTextContentDesc = styled.div``;
+
+function getMoonPhasesImgs(active) {
+    let moonphasesimgurls = [];
+    for (let passivemoonphase of inactivemoonphases.keys()) {
+        if (passivemoonphase === active) {
+            moonphasesimgurls.push(activemoonphases.get(active));
+            continue;
+        }
+        moonphasesimgurls.push(inactivemoonphases.get(passivemoonphase));
+    }
+    return moonphasesimgurls;
+}
 
 function DayDetails(props) {
     return (
@@ -117,11 +131,11 @@ function DayDetails(props) {
                     <DayDetailText>
                         <DayDetailTextHeading>Moon Phase</DayDetailTextHeading>
                         <DayDetailTextContent>
-                            <DayDetailTextContentLogo
-                                src={
-                                    "https://ik.imagekit.io/dchud9yflpr/sunset_xmlFFk7th.svg?updatedAt=1641230704467"
-                                }
-                            />
+                            {getMoonPhasesImgs(
+                                props.forecast.forecastday[0].astro.moon_phase
+                            ).map(function (url, index) {
+                                return <DayDetailTextContentLogo src={url} />;
+                            })}
                         </DayDetailTextContent>
                     </DayDetailText>
                     <DayDetailText>
