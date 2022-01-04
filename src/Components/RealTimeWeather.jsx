@@ -1,6 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { toTime } from "../importantFunctions";
+
+function toTime(unixTimeString) {
+    let time = new Date(unixTimeString * 1000);
+    let time_string = `${time.getHours()}:${time.getMinutes()}`;
+    return time_string;
+}
 
 const RealTimeWeatherContainer = styled.div`
     text-align: center;

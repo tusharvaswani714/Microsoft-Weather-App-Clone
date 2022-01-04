@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import Day from "./Day.jsx";
 
-const DailyDataContainer = styled.div``;
+const DailyDataContainer = styled.div`
+    padding: 20px 0px 40px 0px;
+`;
 
 const DailyDataHeading = styled.div`
     font-size: 25px;
@@ -10,19 +13,39 @@ const DailyDataHeading = styled.div`
 
 const DailyDataContent = styled.div`
     display: flex;
+    overflow-x: hidden;
+    padding-bottom: 20px;
 `;
 
-function DailyData(props) {
-    function toTime(unixTimeString) {
-        let time = new Date(unixTimeString * 1000);
-        let time_string = `${time.getHours()}:${time.getMinutes()}`;
-        return time_string;
-    }
+function DailyData({ realtime_weather, unit }) {
+    const [selected, changeSelected] = useState(0);
     return (
         <DailyDataContainer>
             <DailyDataHeading>Daily Details</DailyDataHeading>
             <DailyDataContent>
-                {/* {props.forecast.forecastday.map()} */}
+                {realtime_weather.forecast.forecastday.map(function (
+                    weather_of_day,
+                    index
+                ) {
+                    if (index === selected) {
+                        return (
+                            <Day
+                                weather_of_day={weather_of_day}
+                                unit={unit}
+                                selected
+                                changeSelected={changeSelected}
+                            />
+                        );
+                    }
+                    return (
+                        <Day
+                            weather_of_day={weather_of_day}
+                            unit={unit}
+                            selected={false}
+                            changeSelected={changeSelected}
+                        />
+                    );
+                })}
             </DailyDataContent>
         </DailyDataContainer>
     );
