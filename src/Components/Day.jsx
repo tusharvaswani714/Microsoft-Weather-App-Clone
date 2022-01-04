@@ -3,6 +3,18 @@ import styled from "styled-components";
 
 let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+const DayChevron = styled.div`
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid rgba(255, 255, 255, 0.3);
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+`;
+
 const DayContainer = styled.div`
     min-width: 200px;
     padding: 15px;
@@ -11,6 +23,9 @@ const DayContainer = styled.div`
     gap: 12px;
     &:hover {
         border: 2px solid rgba(255, 255, 255, 0.7);
+    }
+    &:hover ${DayChevron} {
+        border-top: 20px solid rgba(255, 255, 255, 0.7);
     }
     position: relative;
 `;
@@ -35,18 +50,6 @@ const DayTemperatureMin = styled.span`
 `;
 
 const DayWeatherStatus = styled.div``;
-
-const DayChevron = styled.div`
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-top: 20px solid rgba(255, 255, 255, 0.3);
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-`;
 
 function Day({ weather_of_day, unit, selected }) {
     if (selected) {

@@ -62,17 +62,15 @@ class Main extends React.Component {
                 <RealTimeWeather
                     realtime_weather={realtime_weather}
                     unit={this.state.currentUnit}
-                    changeUnit={this.changeUnit}
+                    changeUnit={this.changeUnit.bind(this)}
                 />
                 <DailyData
                     realtime_weather={realtime_weather}
                     unit={this.state.currentUnit}
-                    changeUnit={this.changeUnit}
                 />
                 <DayDetails
                     realtime_weather={realtime_weather}
                     unit={this.state.currentUnit}
-                    changeUnit={this.changeUnit}
                 />
             </MainArea>
         );
