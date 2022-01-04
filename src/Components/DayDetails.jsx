@@ -17,7 +17,7 @@ const DayDetailsContent = styled.div`
 
 const DayDetail = styled.div`
     width: 290px;
-    border-top: 1px solid #8190b5;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
     padding-top: 15px;
     display: flex;
     flex-direction: column;
