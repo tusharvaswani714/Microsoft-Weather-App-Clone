@@ -13,8 +13,9 @@ const HourlyDataHeading = styled.div`
 
 const HourlyDataContent = styled.div`
     display: flex;
-    overflow-x: hidden;
-    padding-bottom: 20px;
+    border-top: 2px solid rgba(255, 255, 255, 0.7);
+    overflow: hidden visible !important;
+    padding-bottom: 35px;
 `;
 
 function HourlyData({ realtime_weather, unit, selectedDay }) {
