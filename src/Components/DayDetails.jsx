@@ -73,6 +73,43 @@ const TemperatureThermometerBar = styled.div`
     margin: auto;
 `;
 
+const MaxTemp = styled.div`
+    position: relative;
+    top: 20px;
+    right: -10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+`;
+const AverageTemp = styled.div`
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+`;
+const MinTemp = styled.div`
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+`;
+
+const TempContent = styled.div`
+    font-size: 20px;
+`;
+
+const TempLine = styled.div`
+    width: 40px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.7);
+    flex-shrink: 0;
+`;
+
 const TemperatureThermometerCircle = styled.div`
     margin: auto;
     width: 30px;
@@ -96,7 +133,7 @@ function getMoonPhasesImgs(active) {
     return moonphasesimgurls;
 }
 
-function DayDetails({ realtime_weather }) {
+function DayDetails({ realtime_weather, unit }) {
     return (
         <DayDetailsContainer>
             <DayDetailsHeading>Day Details</DayDetailsHeading>
@@ -279,7 +316,56 @@ function DayDetails({ realtime_weather }) {
                         <DayDetailTextHeading>Temperature</DayDetailTextHeading>
                         <DayDetailTextContent>
                             <TemperatureThermometer>
-                                <TemperatureThermometerBar></TemperatureThermometerBar>
+                                <TemperatureThermometerBar>
+                                    <MaxTemp>
+                                        <TempLine></TempLine>
+                                        <TempContent>
+                                            {unit === "C"
+                                                ? `${Math.trunc(
+                                                      realtime_weather.forecast
+                                                          .forecastday[0].day
+                                                          .maxtemp_c
+                                                  )}°C`
+                                                : `${Math.trunc(
+                                                      realtime_weather.forecast
+                                                          .forecastday[0].day
+                                                          .maxtemp_f
+                                                  )}°F`}
+                                        </TempContent>
+                                    </MaxTemp>
+                                    <AverageTemp>
+                                        <TempContent>
+                                            {unit === "C"
+                                                ? `${Math.trunc(
+                                                      realtime_weather.forecast
+                                                          .forecastday[0].day
+                                                          .avgtemp_c
+                                                  )}°C`
+                                                : `${Math.trunc(
+                                                      realtime_weather.forecast
+                                                          .forecastday[0].day
+                                                          .avgtemp_f
+                                                  )}°F`}
+                                        </TempContent>
+                                        <TempLine></TempLine>
+                                    </AverageTemp>
+                                    <MinTemp>
+                                        <TempLine></TempLine>
+                                        <TempContent>
+                                            {unit === "C"
+                                                ? `${Math.trunc(
+                                                      realtime_weather.forecast
+                                                          .forecastday[0].day
+                                                          .mintemp_c
+                                                  )}°C`
+                                                : `${Math.trunc(
+                                                      realtime_weather.forecast
+                                                          .forecastday[0].day
+                                                          .mintemp_f
+                                                  )}°F`}
+                                        </TempContent>
+                                    </MinTemp>
+                                </TemperatureThermometerBar>
                                 <TemperatureThermometerCircle></TemperatureThermometerCircle>
                             </TemperatureThermometer>
                         </DayDetailTextContent>
