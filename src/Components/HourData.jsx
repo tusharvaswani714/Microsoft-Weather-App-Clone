@@ -15,9 +15,14 @@ const HourWindSpeed = styled.div``;
 
 const HourWeatherStatus = styled.div``;
 
-const HourWeatherDetail = styled.div``;
+const HourWeatherDetail = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
 
-const HourOfWeatherTime = styled.div``;
+const HourOfWeatherTime = styled.div`
+    border-top: 2px solid rgba(255, 255, 255, 0.7);
+`;
 
 function HourData({ weather_of_hour, unit }) {
     console.log(weather_of_hour);
