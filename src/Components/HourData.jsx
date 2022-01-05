@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-const HourDataContainer = styled.div``;
+const HourDataContainer = styled.div`
+    min-width: 100px;
+`;
 
 const HourWeatherIcon = styled.img``;
 
