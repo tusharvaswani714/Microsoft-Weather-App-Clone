@@ -19,6 +19,10 @@ const DailyDataContent = styled.div`
 
 function DailyData({ realtime_weather, unit }) {
     const [selected, changeSelected] = useState(0);
+    function changeState() {
+        console.log("Hello");
+        changeSelected(2);
+    }
     return (
         <DailyDataContainer>
             <DailyDataHeading>Daily Details</DailyDataHeading>
@@ -27,22 +31,12 @@ function DailyData({ realtime_weather, unit }) {
                     weather_of_day,
                     index
                 ) {
-                    if (index === selected) {
-                        return (
-                            <Day
-                                weather_of_day={weather_of_day}
-                                unit={unit}
-                                selected
-                                changeSelected={changeSelected}
-                            />
-                        );
-                    }
                     return (
                         <Day
                             weather_of_day={weather_of_day}
                             unit={unit}
-                            selected={false}
-                            changeSelected={changeSelected}
+                            selected={index === selected}
+                            onClick={() => changeSelected(index)}
                         />
                     );
                 })}
