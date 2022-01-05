@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Day from "./Day.jsx";
 
@@ -17,12 +17,7 @@ const DailyDataContent = styled.div`
     padding-bottom: 20px;
 `;
 
-function DailyData({ realtime_weather, unit }) {
-    const [selected, changeSelected] = useState(0);
-    function changeState() {
-        console.log("Hello");
-        changeSelected(2);
-    }
+function DailyData({ realtime_weather, unit, selectedDay, changeSelected }) {
     return (
         <DailyDataContainer>
             <DailyDataHeading>Daily Details</DailyDataHeading>
@@ -35,8 +30,9 @@ function DailyData({ realtime_weather, unit }) {
                         <Day
                             weather_of_day={weather_of_day}
                             unit={unit}
-                            selected={index === selected}
-                            onClick={() => changeSelected(index)}
+                            selected={index === selectedDay}
+                            changeSelected={changeSelected}
+                            index={index}
                         />
                     );
                 })}

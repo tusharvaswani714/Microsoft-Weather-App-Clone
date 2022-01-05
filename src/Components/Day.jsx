@@ -51,7 +51,7 @@ const DayTemperatureMin = styled.span`
 
 const DayWeatherStatus = styled.div``;
 
-function Day({ weather_of_day, unit, selected }) {
+function Day({ weather_of_day, unit, selected, changeSelected, index }) {
     if (selected) {
         return (
             <DayContainer
@@ -84,7 +84,11 @@ function Day({ weather_of_day, unit, selected }) {
         );
     }
     return (
-        <DayContainer>
+        <DayContainer
+            onClick={() => {
+                changeSelected(index);
+            }}
+        >
             <DayDate>
                 {days[new Date(weather_of_day.date_epoch * 1000).getDay()]}{" "}
                 {new Date(weather_of_day.date_epoch * 1000).getDate()}

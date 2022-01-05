@@ -4,6 +4,7 @@ import { realtime_weather } from "../data";
 import RealTimeWeather from "./RealTimeWeather";
 import DayDetails from "./DayDetails";
 import DailyData from "./DailyData";
+import HourlyData from "./HourlyData";
 
 const MainArea = styled.div`
     color: #fff;
@@ -18,7 +19,12 @@ const MainArea = styled.div`
 class Main extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { weatherdata: {}, dataRecieved: false, currentUnit: "C" };
+        this.state = {
+            weatherdata: {},
+            dataRecieved: false,
+            currentUnit: "C",
+            selectedDay: 0,
+        };
     }
     // componentDidMount() {
     //     window.navigator.geolocation.getCurrentPosition(
@@ -67,6 +73,15 @@ class Main extends React.Component {
                 <DailyData
                     realtime_weather={realtime_weather}
                     unit={this.state.currentUnit}
+                    selectedDay={this.state.selectedDay}
+                    changeSelected={(index) =>
+                        this.setState({ selectedDay: index })
+                    }
+                />
+                <HourlyData
+                    realtime_weather={realtime_weather}
+                    unit={this.state.currentUnit}
+                    selectedDay={this.state.selectedDay}
                 />
                 <DayDetails
                     realtime_weather={realtime_weather}
