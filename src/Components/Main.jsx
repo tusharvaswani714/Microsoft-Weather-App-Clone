@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { realtime_weather } from "../data";
 import RealTimeWeather from "./RealTimeWeather";
 import DayDetails from "./DayDetails";
 import DailyData from "./DailyData";
@@ -15,28 +14,23 @@ const MainArea = styled.div`
     font-family: "PT Sans", sans-serif;
     font-weight: 300;
     margin: auto;
+    @media screen and (max-width: 385px) {
+        padding: 24px 30px;
+    }
 `;
 
-class Main extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            weatherdata: {},
-            dataRecieved: false,
-            currentUnit: "C",
-            selectedDay: 0,
-        };
-    }
-    componentDidMount() {
-        if (this.props.location) {
+function Main({ location }) {
+    const [currentUnit, setCurrentUnit] = useState("C");
+    const [selectedDay, setSelectedDay] = useState(0);
+    const [weatherdata, setWeatherdata] = useState(undefined);
+    useEffect(() => {
+        if (location) {
             fetch(
-                `https://api.weatherapi.com/v1/forecast.json?key=07ea304d0187480f863192418220201&q=${this.props.location}&days=7&aqi=yes`
+                `https://api.weatherapi.com/v1/forecast.json?key=07ea304d0187480f863192418220201&q=${location}&days=7&aqi=yes`
             )
                 .then((response) => response.json())
                 .then((data) => {
-                    this.setState({ weatherdata: data }, function () {
-                        this.setState({ dataRecieved: true });
-                    });
+                    setWeatherdata(data);
                 });
         } else {
             window.navigator.geolocation.getCurrentPosition(
@@ -46,9 +40,7 @@ class Main extends React.Component {
                     )
                         .then((response) => response.json())
                         .then((data) => {
-                            this.setState({ weatherdata: data }, function () {
-                                this.setState({ dataRecieved: true });
-                            });
+                            setWeatherdata(data);
                         });
                 },
                 (err) => {
@@ -57,72 +49,40 @@ class Main extends React.Component {
                 { enableHighAccuracy: true }
             );
         }
-    }
-    changeUnit() {
-        if (this.state.currentUnit === "C") {
-            this.setState({ currentUnit: "F" });
+    }, []);
+    let changeUnit = () => {
+        if (currentUnit === "C") {
+            setCurrentUnit("F");
             return;
         }
-        this.setState({ currentUnit: "C" });
+        setCurrentUnit("C");
+    };
+    if (weatherdata) {
+        return (
+            <MainArea>
+                <RealTimeWeather
+                    realtime_weather={weatherdata}
+                    unit={currentUnit}
+                    changeUnit={changeUnit}
+                />
+                <DailyData
+                    realtime_weather={weatherdata}
+                    unit={currentUnit}
+                    selectedDay={selectedDay}
+                    changeSelected={(index) => {
+                        setSelectedDay(index);
+                    }}
+                />
+                <HourlyData
+                    realtime_weather={weatherdata}
+                    unit={currentUnit}
+                    selectedDay={selectedDay}
+                />
+                <DayDetails realtime_weather={weatherdata} unit={currentUnit} />
+            </MainArea>
+        );
     }
-    render() {
-        if (this.state.dataRecieved) {
-            return (
-                <MainArea>
-                    <RealTimeWeather
-                        realtime_weather={this.state.weatherdata}
-                        unit={this.state.currentUnit}
-                        changeUnit={this.changeUnit.bind(this)}
-                    />
-                    <DailyData
-                        realtime_weather={this.state.weatherdata}
-                        unit={this.state.currentUnit}
-                        selectedDay={this.state.selectedDay}
-                        changeSelected={(index) =>
-                            this.setState({ selectedDay: index })
-                        }
-                    />
-                    <HourlyData
-                        realtime_weather={this.state.weatherdata}
-                        unit={this.state.currentUnit}
-                        selectedDay={this.state.selectedDay}
-                    />
-                    <DayDetails
-                        realtime_weather={this.state.weatherdata}
-                        unit={this.state.currentUnit}
-                    />
-                </MainArea>
-            );
-        } else {
-            return null;
-        }
-        // return (
-        //     <MainArea>
-        //         <RealTimeWeather
-        //             realtime_weather={realtime_weather}
-        //             unit={this.state.currentUnit}
-        //             changeUnit={this.changeUnit.bind(this)}
-        //         />
-        //         <DailyData
-        //             realtime_weather={realtime_weather}
-        //             unit={this.state.currentUnit}
-        //             selectedDay={this.state.selectedDay}
-        //             changeSelected={(index) =>
-        //                 this.setState({ selectedDay: index })
-        //             }
-        //         />
-        //         <HourlyData
-        //             realtime_weather={realtime_weather}
-        //             unit={this.state.currentUnit}
-        //             selectedDay={this.state.selectedDay}
-        //         />
-        //         <DayDetails
-        //             realtime_weather={realtime_weather}
-        //             unit={this.state.currentUnit}
-        //         />
-        //     </MainArea>
-        // );
-    }
+    return null;
 }
 
 export default Main;

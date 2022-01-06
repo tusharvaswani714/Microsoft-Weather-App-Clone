@@ -4,7 +4,10 @@ import Header from "./Components/Header";
 import { useState } from "react";
 
 function App() {
-    let [location, changeLocation] = useState("");
+    const [location, setLocation] = useState("");
+    let changeLocation = (data) => {
+        setLocation(data);
+    };
     return (
         <div className="App">
             <Header searchWeather={changeLocation} />

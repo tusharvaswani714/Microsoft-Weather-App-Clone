@@ -1,6 +1,5 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
-import { search_data } from "../data";
 
 const HeaderContainer = styled.div`
     background: rgba(255, 255, 255, 0.25);
@@ -17,6 +16,9 @@ const HeaderContainer = styled.div`
     align-items: center;
     gap: 20px;
     font-size: 20px;
+    @media screen and (max-width: 420px) {
+        justify-content: center;
+    }
 `;
 
 const ReloadButton = styled.div`
@@ -42,40 +44,25 @@ const Input = styled.input`
 const DataList = styled.datalist``;
 
 function Header({ searchWeather }) {
+    const [options, setOptions] = useState([]);
     let locationInput = useRef();
-    let locationOptions = useRef();
     useEffect(() => {
-        locationInput.current.addEventListener("keyup", function (e) {
-            // fetch(
-            //     `https://api.weatherapi.com/v1/search.json?key=07ea304d0187480f863192418220201&q=${e.target.value}`
-            // )
-            //     .then((response) => response.json())
-            //     .then((data) => {
-            //         locationOptions.current.innerHTML = "";
-            //         data.map(function (result, id) {
-            //             if (id > 3) {
-            //                 return;
-            //             }
-            //             let option = document.createElement("option");
-            //             option.value = result.name;
-            //             locationOptions.current.append(option);
-            //         });
-            //     });
-            locationOptions.current.innerHTML = "";
-            search_data.map(function (result, id) {
-                if (id > 3) {
-                    return;
-                }
-                let option = document.createElement("option");
-                option.value = `${result.name}, ${result.country}`;
-                locationOptions.current.append(option);
-            });
+        locationInput.current.addEventListener("keyup", (e) => {
+            if (e.target.value) {
+                fetch(
+                    `https://api.weatherapi.com/v1/search.json?key=07ea304d0187480f863192418220201&q=${e.target.value}`
+                )
+                    .then((response) => response.json())
+                    .then((data) => {
+                        setOptions(data);
+                    });
+            }
         });
     });
     return (
         <HeaderContainer>
             <ReloadButton>
-                <i class="fas fa-redo-alt"></i>
+                <i className="fas fa-redo-alt"></i>
             </ReloadButton>
             <Search>
                 <Input
@@ -85,14 +72,20 @@ function Header({ searchWeather }) {
                     ref={locationInput}
                 />
                 <i
-                    class="fas fa-search"
+                    className="fas fa-search"
                     style={{ cursor: "pointer" }}
                     onClick={() => {
                         searchWeather(locationInput.current.value);
                     }}
                 ></i>
             </Search>
-            <DataList id="locations" ref={locationOptions}></DataList>
+            <DataList id="locations">
+                {options.map((option) => {
+                    return (
+                        <option value={`${option.name}, ${option.country}`} />
+                    );
+                })}
+            </DataList>
         </HeaderContainer>
     );
 }

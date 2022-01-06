@@ -7,6 +7,10 @@ const DailyDataContainer = styled.div`
     padding: 20px 0px 40px 0px;
 `;
 
+const DailyDataSliderTrack = styled.div`
+    overflow-x: hidden;
+`;
+
 const DailyDataHeading = styled.div`
     font-size: 25px;
     margin-bottom: 20px;
@@ -84,23 +88,25 @@ function DailyData({ realtime_weather, unit, selectedDay, changeSelected }) {
     }
     return (
         <DailyDataContainer>
-            <DailyDataHeading>Daily Details</DailyDataHeading>
-            <DailyDataContent ref={DailyDataSlider}>
-                {realtime_weather.forecast.forecastday.map(function (
-                    weather_of_day,
-                    index
-                ) {
-                    return (
-                        <Day
-                            weather_of_day={weather_of_day}
-                            unit={unit}
-                            selected={index === selectedDay}
-                            changeSelected={changeSelected}
-                            index={index}
-                        />
-                    );
-                })}
-            </DailyDataContent>
+            <DailyDataSliderTrack>
+                <DailyDataHeading>Daily Details</DailyDataHeading>
+                <DailyDataContent ref={DailyDataSlider}>
+                    {realtime_weather.forecast.forecastday.map(function (
+                        weather_of_day,
+                        index
+                    ) {
+                        return (
+                            <Day
+                                weather_of_day={weather_of_day}
+                                unit={unit}
+                                selected={index === selectedDay}
+                                changeSelected={changeSelected}
+                                index={index}
+                            />
+                        );
+                    })}
+                </DailyDataContent>
+            </DailyDataSliderTrack>
             <Arrow style={{ left: "-35px" }} onClick={backward}>
                 {"<"}
             </Arrow>

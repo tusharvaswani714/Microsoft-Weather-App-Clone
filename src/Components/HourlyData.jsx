@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
-import HourData from "./HourData";
+import Hour from "./Hour";
 
 const HourlyDataContainer = styled.div`
     padding: 20px 0px 40px 0px;
@@ -39,6 +39,9 @@ const Arrow = styled.div`
     }
     cursor: pointer;
     user-select: none;
+    @media screen and (max-width: 385px) {
+        padding: 24px 20px;
+    }
 `;
 
 function HourlyData({ realtime_weather, unit, selectedDay }) {
@@ -98,7 +101,7 @@ function HourlyData({ realtime_weather, unit, selectedDay }) {
                         selectedDay
                     ].hour.map(function (weather_of_hour) {
                         return (
-                            <HourData
+                            <Hour
                                 weather_of_hour={weather_of_hour}
                                 unit={unit}
                             />

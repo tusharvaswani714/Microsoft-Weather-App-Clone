@@ -34,6 +34,7 @@ const DegreeSymbol = styled.span``;
 
 const TemperatureUnitSwitcher = styled.div`
     font-size: 1.5625em;
+    user-select: none;
 `;
 
 const SelectedUnit = styled.div``;

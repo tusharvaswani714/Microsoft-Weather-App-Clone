@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const HourDataContainer = styled.div`
+const HourContainer = styled.div`
     min-width: 100px;
     border-top: 2px solid rgba(255, 255, 255, 0.7);
 `;
@@ -46,9 +46,9 @@ const HourOfWeatherTime = styled.div`
     padding-left: 15px;
 `;
 
-function HourData({ weather_of_hour, unit }) {
+function Hour({ weather_of_hour, unit }) {
     return (
-        <HourDataContainer>
+        <HourContainer>
             <HourWeatherDetail>
                 <HourWeatherIcon
                     src={weather_of_hour.condition.icon}
@@ -83,8 +83,8 @@ function HourData({ weather_of_hour, unit }) {
                           weather_of_hour.time_epoch * 1000
                       ).getHours()} am`}
             </HourOfWeatherTime>
-        </HourDataContainer>
+        </HourContainer>
     );
 }
 
-export default HourData;
+export default Hour;
