@@ -41,7 +41,7 @@ const Input = styled.input`
 
 const DataList = styled.datalist``;
 
-function Header() {
+function Header({ searchWeather }) {
     let locationInput = useRef();
     let locationOptions = useRef();
     useEffect(() => {
@@ -84,7 +84,13 @@ function Header() {
                     list="locations"
                     ref={locationInput}
                 />
-                <i class="fas fa-search" style={{ cursor: "pointer" }}></i>
+                <i
+                    class="fas fa-search"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                        searchWeather(locationInput.current.value);
+                    }}
+                ></i>
             </Search>
             <DataList id="locations" ref={locationOptions}></DataList>
         </HeaderContainer>

@@ -27,25 +27,37 @@ class Main extends React.Component {
             selectedDay: 0,
         };
     }
-    // componentDidMount() {
-    //     window.navigator.geolocation.getCurrentPosition(
-    //         (location) => {
-    //             fetch(
-    //                 `https://api.weatherapi.com/v1/forecast.json?key=07ea304d0187480f863192418220201&q=${location.coords.latitude},${location.coords.longitude}&days=7&aqi=yes`
-    //             )
-    //                 .then((response) => response.json())
-    //                 .then((data) => {
-    //                     this.setState({ weatherdata: data }, function () {
-    //                         this.setState({ dataRecieved: true });
-    //                     });
-    //                 });
-    //         },
-    //         (err) => {
-    //             console.log(err);
-    //         },
-    //         { enableHighAccuracy: true }
-    //     );
-    // }
+    componentDidMount() {
+        if (this.props.location) {
+            fetch(
+                `https://api.weatherapi.com/v1/forecast.json?key=07ea304d0187480f863192418220201&q=${this.props.location}&days=7&aqi=yes`
+            )
+                .then((response) => response.json())
+                .then((data) => {
+                    this.setState({ weatherdata: data }, function () {
+                        this.setState({ dataRecieved: true });
+                    });
+                });
+        } else {
+            window.navigator.geolocation.getCurrentPosition(
+                (location) => {
+                    fetch(
+                        `https://api.weatherapi.com/v1/forecast.json?key=07ea304d0187480f863192418220201&q=${location.coords.latitude},${location.coords.longitude}&days=7&aqi=yes`
+                    )
+                        .then((response) => response.json())
+                        .then((data) => {
+                            this.setState({ weatherdata: data }, function () {
+                                this.setState({ dataRecieved: true });
+                            });
+                        });
+                },
+                (err) => {
+                    console.log(err);
+                },
+                { enableHighAccuracy: true }
+            );
+        }
+    }
     changeUnit() {
         if (this.state.currentUnit === "C") {
             this.setState({ currentUnit: "F" });
@@ -54,42 +66,62 @@ class Main extends React.Component {
         this.setState({ currentUnit: "C" });
     }
     render() {
-        // if (this.state.dataRecieved) {
-        //     return (
-        //         <MainArea>
-        //             <RealTimeWeather {...this.state.weatherdata} />
-        //             <DayDetails {...this.state.weatherdata} />
-        //         </MainArea>
-        //     );
-        // } else {
-        //     return null;
-        // }
-        return (
-            <MainArea>
-                <RealTimeWeather
-                    realtime_weather={realtime_weather}
-                    unit={this.state.currentUnit}
-                    changeUnit={this.changeUnit.bind(this)}
-                />
-                <DailyData
-                    realtime_weather={realtime_weather}
-                    unit={this.state.currentUnit}
-                    selectedDay={this.state.selectedDay}
-                    changeSelected={(index) =>
-                        this.setState({ selectedDay: index })
-                    }
-                />
-                <HourlyData
-                    realtime_weather={realtime_weather}
-                    unit={this.state.currentUnit}
-                    selectedDay={this.state.selectedDay}
-                />
-                <DayDetails
-                    realtime_weather={realtime_weather}
-                    unit={this.state.currentUnit}
-                />
-            </MainArea>
-        );
+        if (this.state.dataRecieved) {
+            return (
+                <MainArea>
+                    <RealTimeWeather
+                        realtime_weather={this.state.weatherdata}
+                        unit={this.state.currentUnit}
+                        changeUnit={this.changeUnit.bind(this)}
+                    />
+                    <DailyData
+                        realtime_weather={this.state.weatherdata}
+                        unit={this.state.currentUnit}
+                        selectedDay={this.state.selectedDay}
+                        changeSelected={(index) =>
+                            this.setState({ selectedDay: index })
+                        }
+                    />
+                    <HourlyData
+                        realtime_weather={this.state.weatherdata}
+                        unit={this.state.currentUnit}
+                        selectedDay={this.state.selectedDay}
+                    />
+                    <DayDetails
+                        realtime_weather={this.state.weatherdata}
+                        unit={this.state.currentUnit}
+                    />
+                </MainArea>
+            );
+        } else {
+            return null;
+        }
+        // return (
+        //     <MainArea>
+        //         <RealTimeWeather
+        //             realtime_weather={realtime_weather}
+        //             unit={this.state.currentUnit}
+        //             changeUnit={this.changeUnit.bind(this)}
+        //         />
+        //         <DailyData
+        //             realtime_weather={realtime_weather}
+        //             unit={this.state.currentUnit}
+        //             selectedDay={this.state.selectedDay}
+        //             changeSelected={(index) =>
+        //                 this.setState({ selectedDay: index })
+        //             }
+        //         />
+        //         <HourlyData
+        //             realtime_weather={realtime_weather}
+        //             unit={this.state.currentUnit}
+        //             selectedDay={this.state.selectedDay}
+        //         />
+        //         <DayDetails
+        //             realtime_weather={realtime_weather}
+        //             unit={this.state.currentUnit}
+        //         />
+        //     </MainArea>
+        // );
     }
 }
 
