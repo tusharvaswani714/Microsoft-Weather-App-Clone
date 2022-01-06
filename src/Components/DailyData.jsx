@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import Day from "./Day.jsx";
 
 const DailyDataContainer = styled.div`
+    position: relative;
     padding: 20px 0px 40px 0px;
 `;
 
@@ -13,15 +14,78 @@ const DailyDataHeading = styled.div`
 
 const DailyDataContent = styled.div`
     display: flex;
-    overflow-x: hidden;
     padding-bottom: 20px;
+    transition: transform 0.2s;
+`;
+
+const Arrow = styled.div`
+    color: rgb(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 25px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    &:hover {
+        border: 1px solid #fff;
+    }
+    user-select: none;
+    cursor: pointer;
 `;
 
 function DailyData({ realtime_weather, unit, selectedDay, changeSelected }) {
+    let DailyDataSlider = useRef();
+    function forward() {
+        if (
+            200 * realtime_weather.forecast.forecastday.length >
+            DailyDataSlider.current.offsetWidth
+        ) {
+            if (
+                realtime_weather.forecast.forecastday.length * 200 ===
+                +DailyDataSlider.current.style.transform.replace(
+                    /^\D+|\D+$/g,
+                    ""
+                )
+            ) {
+                return;
+            }
+            DailyDataSlider.current.style.transform = `translateX(-${
+                +DailyDataSlider.current.style.transform.replace(
+                    /^\D+|\D+$/g,
+                    ""
+                ) + 200
+            }px)`;
+        }
+    }
+    function backward() {
+        if (
+            200 * realtime_weather.forecast.forecastday.length >
+            DailyDataSlider.current.offsetWidth
+        ) {
+            if (
+                +DailyDataSlider.current.style.transform.replace(
+                    /^\D+|\D+$/g,
+                    ""
+                ) === 0
+            ) {
+                return;
+            }
+            DailyDataSlider.current.style.transform = `translateX(-${
+                +DailyDataSlider.current.style.transform.replace(
+                    /^\D+|\D+$/g,
+                    ""
+                ) - 200
+            }px)`;
+        }
+    }
     return (
         <DailyDataContainer>
             <DailyDataHeading>Daily Details</DailyDataHeading>
-            <DailyDataContent>
+            <DailyDataContent ref={DailyDataSlider}>
                 {realtime_weather.forecast.forecastday.map(function (
                     weather_of_day,
                     index
@@ -37,6 +101,12 @@ function DailyData({ realtime_weather, unit, selectedDay, changeSelected }) {
                     );
                 })}
             </DailyDataContent>
+            <Arrow style={{ left: "-35px" }} onClick={backward}>
+                {"<"}
+            </Arrow>
+            <Arrow style={{ right: "-35px" }} onClick={forward}>
+                {">"}
+            </Arrow>
         </DailyDataContainer>
     );
 }

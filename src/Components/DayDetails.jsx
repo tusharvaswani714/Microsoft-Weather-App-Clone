@@ -154,7 +154,7 @@ function DayDetails({ realtime_weather, unit }) {
                         <DayDetailTextContent>
                             <DayDetailTextContentLogo
                                 src={
-                                    "https://ik.imagekit.io/dchud9yflpr/sunrise_bhQw0Iuzr.svg?updatedAt=1641230704341"
+                                    "https://ik.imagekit.io/dchud9yflpr/sunrise_yf7tRSjF5.svg?updatedAt=1641458499933"
                                 }
                             />
                             <DayDetailTextContentDesc>
@@ -170,7 +170,7 @@ function DayDetails({ realtime_weather, unit }) {
                         <DayDetailTextContent>
                             <DayDetailTextContentLogo
                                 src={
-                                    "https://ik.imagekit.io/dchud9yflpr/sunset_xmlFFk7th.svg?updatedAt=1641230704467"
+                                    "https://ik.imagekit.io/dchud9yflpr/sunset_tW2ZbA8cdNFi.svg?updatedAt=1641458499782"
                                 }
                             />
                             <DayDetailTextContentDesc>
@@ -188,7 +188,7 @@ function DayDetails({ realtime_weather, unit }) {
                         <DayDetailTextContent>
                             <DayDetailTextContentLogo
                                 src={
-                                    "https://ik.imagekit.io/dchud9yflpr/sunrise_bhQw0Iuzr.svg?updatedAt=1641230704341"
+                                    "https://ik.imagekit.io/dchud9yflpr/moonrise_e64A9HaEW.svg?updatedAt=1641458499432"
                                 }
                             />
                             <DayDetailTextContentDesc>
@@ -204,7 +204,7 @@ function DayDetails({ realtime_weather, unit }) {
                         <DayDetailTextContent>
                             <DayDetailTextContentLogo
                                 src={
-                                    "https://ik.imagekit.io/dchud9yflpr/sunset_xmlFFk7th.svg?updatedAt=1641230704467"
+                                    "https://ik.imagekit.io/dchud9yflpr/moonset_AVhhCKoj6.svg?updatedAt=1641458499276"
                                 }
                             />
                             <DayDetailTextContentDesc>
@@ -307,7 +307,7 @@ function DayDetails({ realtime_weather, unit }) {
                             Precipitation
                         </DayDetailTextHeading>
                         <DayDetailTextContent>
-                            {realtime_weather.current.precip_mm}mm
+                            {realtime_weather.current.precip_mm} mm
                         </DayDetailTextContent>
                     </DayDetailText>
                 </DayDetail>

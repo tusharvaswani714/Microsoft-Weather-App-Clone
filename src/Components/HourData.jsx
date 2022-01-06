@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const HourDataContainer = styled.div`
     min-width: 100px;
+    border-top: 2px solid rgba(255, 255, 255, 0.7);
 `;
 
 const HourWeatherIcon = styled.img``;
@@ -46,7 +47,6 @@ const HourOfWeatherTime = styled.div`
 `;
 
 function HourData({ weather_of_hour, unit }) {
-    console.log(weather_of_hour);
     return (
         <HourDataContainer>
             <HourWeatherDetail>
