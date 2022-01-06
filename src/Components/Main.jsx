@@ -7,6 +7,7 @@ import DailyData from "./DailyData";
 import HourlyData from "./HourlyData";
 
 const MainArea = styled.div`
+    padding: 24px 40px;
     color: #fff;
     letter-spacing: 0.6px;
     word-spacing: 3px;
