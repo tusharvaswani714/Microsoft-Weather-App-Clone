@@ -49,7 +49,7 @@ function Main({ location }) {
                 { enableHighAccuracy: true }
             );
         }
-    }, []);
+    }, [location]);
     let changeUnit = () => {
         if (currentUnit === "C") {
             setCurrentUnit("F");

@@ -47,10 +47,10 @@ function Header({ searchWeather }) {
     const [options, setOptions] = useState([]);
     let locationInput = useRef();
     useEffect(() => {
-        locationInput.current.addEventListener("keyup", (e) => {
-            if (e.target.value) {
+        locationInput.current.addEventListener("keyup", (elem) => {
+            if (elem.target.value) {
                 fetch(
-                    `https://api.weatherapi.com/v1/search.json?key=07ea304d0187480f863192418220201&q=${e.target.value}`
+                    `https://api.weatherapi.com/v1/search.json?key=07ea304d0187480f863192418220201&q=${elem.target.value}`
                 )
                     .then((response) => response.json())
                     .then((data) => {
@@ -58,7 +58,7 @@ function Header({ searchWeather }) {
                     });
             }
         });
-    });
+    }, []);
     return (
         <HeaderContainer>
             <ReloadButton>
