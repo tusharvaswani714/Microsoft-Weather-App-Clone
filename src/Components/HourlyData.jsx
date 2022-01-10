@@ -1,6 +1,7 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import Hour from "./Hour";
+import movingSlider from "../movingSlider";
 
 const HourlyDataContainer = styled.div`
     padding: 20px 0px 40px 0px;
@@ -46,6 +47,13 @@ const Arrow = styled.div`
 
 function HourlyData({ realtime_weather, unit, selectedDay }) {
     let HourlyDataSlider = useRef();
+    useEffect(() => {
+        movingSlider(
+            100,
+            realtime_weather.forecast.forecastday[selectedDay].hour.length,
+            HourlyDataSlider.current
+        );
+    });
     function forward() {
         if (
             100 *

@@ -1,6 +1,7 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import Day from "./Day.jsx";
+import movingSlider from "../movingSlider";
 
 const DailyDataContainer = styled.div`
     position: relative;
@@ -43,6 +44,13 @@ const Arrow = styled.div`
 
 function DailyData({ realtime_weather, unit, selectedDay, changeSelected }) {
     let DailyDataSlider = useRef();
+    useEffect(() => {
+        movingSlider(
+            200,
+            realtime_weather.forecast.forecastday.length,
+            DailyDataSlider.current
+        );
+    });
     function forward() {
         if (
             200 * realtime_weather.forecast.forecastday.length >
