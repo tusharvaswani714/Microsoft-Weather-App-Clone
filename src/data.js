@@ -1,3 +1,57 @@
+// let a = [
+//     [
+//         {
+//             heading: "Wind Speed",
+//             content: realtime_weather.current.wind_kph,
+//         },
+//         {
+//             heading: "Wind Direction",
+//             content: `${realtime_weather.current.wind_degree}°${realtime_weather.current.wind_dir}`,
+//         },
+//     ],
+//     [
+//         {
+//             heading: "Sunrise",
+//             contentLogo:
+//                 "https://ik.imagekit.io/dchud9yflpr/sunrise_yf7tRSjF5.svg?updatedAt=1641458499933",
+//             content: realtime_weather.forecast.forecastday[0].astro.sunrise,
+//         },
+//         {
+//             heading: "Sunset",
+//             contentLogo:
+//                 "https://ik.imagekit.io/dchud9yflpr/sunset_tW2ZbA8cdNFi.svg?updatedAt=1641458499782",
+//             content: realtime_weather.forecast.forecastday[0].astro.sunset,
+//         },
+//     ],
+//     [
+//         {
+//             heading: "Moonrise",
+//             contentLogo:
+//                 "https://ik.imagekit.io/dchud9yflpr/moonrise_e64A9HaEW.svg?updatedAt=1641458499432",
+//             content: realtime_weather.forecast.forecastday[0].astro.moonrise,
+//         },
+//         {
+//             heading: "Moonset",
+//             contentLogo:
+//                 "https://ik.imagekit.io/dchud9yflpr/moonset_AVhhCKoj6.svg?updatedAt=1641458499276",
+//             content: realtime_weather.forecast.forecastday[0].astro.moonset,
+//         },
+//         {
+//             heading: "Moon Phase",
+//             contentLogoCollection:
+//                 "https://ik.imagekit.io/dchud9yflpr/moonset_AVhhCKoj6.svg?updatedAt=1641458499276",
+//         },
+//         {
+//             heading: realtime_weather.forecast.forecastday[0].astro.moon_phase,
+//         },
+//     ],
+//     [
+//         {
+//             heading: "Air Quality",
+//         },
+//     ],
+// ];
+
 export let search_data = [
     {
         id: 1123497,
