@@ -12,8 +12,17 @@ export default function movingSlider(slideWidth, totalSlides, sliderTrack) {
         if (touchdown) {
             if (slideWidth * totalSlides > sliderTrack.offsetWidth) {
                 let currentPosition = e.touches[0].clientX;
-                if (currentPosition - previousPosition >= 100) {
-                    sliderTrack.style.transform = `translateX(-100px)`;
+                if (Math.trunc(currentPosition - previousPosition) >= 200) {
+                    if (
+                        totalSlides * 100 ===
+                        +sliderTrack.style.transform.replace(/^\D+|\D+$/g, "")
+                    ) {
+                        return;
+                    }
+                    sliderTrack.style.transform = `translateX(-${
+                        +sliderTrack.style.transform.replace(/^\D+|\D+$/g, "") +
+                        100
+                    }px)`;
                 }
             }
         }
