@@ -114,9 +114,19 @@ function DayDetail({ details }) {
                                         src={detail.contentLogo}
                                     />
                                 ) : null}
-                                <DayDetailTextContentDesc>
-                                    {detail.content}
-                                </DayDetailTextContentDesc>
+                                {detail.content ? (
+                                    <DayDetailTextContentDesc>
+                                        {detail.content}
+                                    </DayDetailTextContentDesc>
+                                ) : (
+                                    detail.contentDesc.map((contentDesc) => {
+                                        return (
+                                            <DayDetailTextContentDesc>
+                                                {contentDesc}
+                                            </DayDetailTextContentDesc>
+                                        );
+                                    })
+                                )}
                             </DayDetailTextContent>
                         ) : null}
                         {detail.contentDesc ? (
